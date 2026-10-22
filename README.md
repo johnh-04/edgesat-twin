@@ -87,6 +87,8 @@ Python 3.11 or newer.
 
 ```bash
 git clone https://github.com/<your-user>/edgesat-twin.git
+conda create -n edgesat python=3.12 -y
+conda activate edgesat
 cd edgesat-twin
 pip install -r requirements.txt
 python -m server.app            # open http://localhost:8000
