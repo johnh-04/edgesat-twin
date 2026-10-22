@@ -1,0 +1,5 @@
+-r requirements.txt
+pytest>=7
+httpx>=0.24
+matplotlib>=3.7
+pillow>=10

@@ -1,0 +1,57 @@
+{
+  "classes": [
+    "CLOUD",
+    "WATER",
+    "LAND",
+    "FIRE"
+  ],
+  "architecture": "conv3x3(8)-pool-conv3x3(16)-pool-conv3x3(16)-[GAP|GMP]-dense(4)",
+  "input": "32x32x4 (B,G,R,NIR) decimated tile, int8",
+  "params": 3916,
+  "size_bytes_int8": 4048,
+  "macs_per_tile": 737408,
+  "val_accuracy_float": 0.967,
+  "val_accuracy_int8": 0.9635,
+  "recall_int8": {
+    "CLOUD": 0.9695885509838998,
+    "WATER": 0.949238578680203,
+    "LAND": 0.9559055118110236,
+    "FIRE": 0.9805825242718447
+  },
+  "precision_int8": {
+    "CLOUD": 0.9525483304042179,
+    "WATER": 0.958974358974359,
+    "LAND": 0.9559055118110236,
+    "FIRE": 0.9950738916256158
+  },
+  "confusion_int8": [
+    [
+      542,
+      2,
+      14,
+      1
+    ],
+    [
+      8,
+      374,
+      12,
+      0
+    ],
+    [
+      16,
+      11,
+      607,
+      1
+    ],
+    [
+      3,
+      3,
+      2,
+      404
+    ]
+  ],
+  "n_train": 9000,
+  "n_val": 2000,
+  "epochs": 16,
+  "train_time_s": 181.4
+}

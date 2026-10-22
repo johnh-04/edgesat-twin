@@ -1,0 +1,248 @@
+# =============================================================================
+#  EDGESAT-1 — mission configuration
+#  6U Earth-observation CubeSat with on-board Edge AI for wildfire monitoring.
+#  Every number used by the simulator lives here. SI units unless noted.
+# =============================================================================
+
+[mission]
+name = "EDGESAT-1"
+epoch_utc = "2027-07-15T04:00:00"   # peak Mediterranean fire season
+dt = 1.0                            # simulation step [s]
+seed = 42
+
+[orbit]
+# Sun-synchronous circular orbit. Inclination is derived from the altitude.
+altitude_km = 525.0
+eccentricity = 0.0005
+ltan_hours = 10.5                   # local time of ascending node
+arg_perigee_deg = 90.0
+true_anomaly_deg = 0.0
+density_scale = 1.6                 # multiplier on the exponential atmosphere (solar-max-ish)
+
+[spacecraft]
+dry_mass_kg = 11.6
+# Body box [m]: X x Y x Z. +Z = camera / S-band patch (nadir in imaging), +Y = solar wings, -X = radiator.
+body_dims_m = [0.226, 0.100, 0.366]
+com_offset_m = [0.004, -0.006, 0.010]          # centre of mass offset from geometric centre
+residual_dipole_Am2 = [0.002, 0.004, -0.003]
+inertia_kgm2 = [[0.162, 0.0012, -0.0021],
+                [0.0012, 0.214, 0.0009],
+                [-0.0021, 0.0009, 0.081]]       # with deployed wings
+drag_cd = 2.2
+srp_reflectivity = 0.3
+
+[adcs]
+control_wn = 0.08          # closed-loop natural frequency [rad/s]
+control_zeta = 0.9
+max_slew_rate_deg_s = 1.5
+bdot_gain = 3.0e5          # [A m^2 s / T]
+momentum_dump_gain = 0.003 # [1/s]
+wheel_max_torque_Nm = 0.002
+wheel_max_momentum_Nms = 0.018
+wheel_inertia_kgm2 = 2.8e-5
+mtq_max_dipole_Am2 = 0.2
+# Sensors
+gyro_arw_rad_sqrt_s = 4.4e-5      # 0.15 deg/sqrt(h)
+gyro_rrw_rad_s_sqrt_s = 3.0e-7    # bias instability random walk
+gyro_initial_bias_deg_s = [0.010, -0.007, 0.004]
+star_tracker_noise_arcsec = 12.0
+star_tracker_boresight_body = [0.0, -0.819, -0.574]   # -Y tilted 35 deg to zenith
+star_tracker_sun_exclusion_deg = 30.0
+star_tracker_earth_margin_deg = 15.0
+star_tracker_max_rate_deg_s = 1.0
+sun_sensor_noise_deg = 0.5
+magnetometer_noise_nT = 150.0
+initial_rate_deg_s = 0.05          # nominal start; LEOP start uses 5 deg/s
+
+[eps]
+cell_efficiency = 0.295
+packing_factor = 0.85
+temp_coeff_per_K = -0.0045
+degradation = 0.97
+# Solar panels: normal in body frame, area [m^2], thermal node
+panels = [
+  { name = "Wing -X", normal = [0.0, 1.0, 0.0], area = 0.0827, node = "SOLAR_ARRAY" },
+  { name = "Wing +X", normal = [0.0, 1.0, 0.0], area = 0.0827, node = "SOLAR_ARRAY" },
+]
+battery_series = 2
+battery_parallel = 4
+cell_capacity_Ah = 3.35
+battery_resistance_ohm = 0.06
+max_charge_current_A = 4.0
+charge_efficiency = 0.97
+initial_soc = 0.85
+soc_payload_off = 0.30   # below: payload & AI powered off
+soc_safe = 0.20          # below: SAFE mode
+soc_recover = 0.50       # above: leave power-saving
+
+[eps.loads]   # [W]
+obc = 0.8
+adcs_electronics = 0.7
+wheel_idle = 0.15          # per wheel
+star_tracker = 1.0
+gyro = 0.3
+gnss = 0.6
+mtq_max = 0.6              # per axis at full dipole
+radio_rx = 0.4
+radio_tx_dc = 6.7          # DC input while transmitting
+camera_imaging = 3.5
+camera_standby = 0.3
+ai_idle = 3.5
+ai_active = 9.0
+battery_heater = 2.0
+payload_heater = 1.5
+prop_valve = 4.0
+
+[tcs]
+# Lumped-parameter nodes: thermal capacitance [J/K], initial temperature [degC],
+# operational limits [degC].
+nodes = [
+  { name = "STRUCTURE",   C = 2700.0, T0 = 15.0, min = -30.0, max = 60.0 },
+  { name = "SOLAR_ARRAY", C = 720.0,  T0 = 20.0, min = -90.0, max = 110.0 },
+  { name = "BATTERY",     C = 800.0,  T0 = 15.0, min = 0.0,   max = 40.0 },
+  { name = "AVIONICS",    C = 540.0,  T0 = 20.0, min = -20.0, max = 70.0 },
+  { name = "PAYLOAD",     C = 1440.0, T0 = 15.0, min = 0.0,   max = 35.0 },
+  { name = "COMMS",       C = 270.0,  T0 = 18.0, min = -20.0, max = 65.0 },
+]
+# Conductive links [W/K]
+links = [
+  ["STRUCTURE", "SOLAR_ARRAY", 0.08],
+  ["STRUCTURE", "BATTERY", 0.35],
+  ["STRUCTURE", "AVIONICS", 0.9],
+  ["STRUCTURE", "PAYLOAD", 0.6],
+  ["STRUCTURE", "COMMS", 0.5],
+  ["AVIONICS", "BATTERY", 0.10],
+]
+# External surfaces: body frame normal, area, solar absorptance, IR emissivity, node.
+# MLI-covered faces use small effective alpha/epsilon.
+surfaces = [
+  { name = "+X MLI",       normal = [1.0, 0.0, 0.0],  area = 0.0366, alpha = 0.02, eps = 0.02, node = "STRUCTURE" },
+  { name = "-X radiator",  normal = [-1.0, 0.0, 0.0], area = 0.0250, alpha = 0.20, eps = 0.85, node = "STRUCTURE" },
+  { name = "-X MLI",       normal = [-1.0, 0.0, 0.0], area = 0.0116, alpha = 0.02, eps = 0.02, node = "STRUCTURE" },
+  { name = "+Y MLI",       normal = [0.0, 1.0, 0.0],  area = 0.0827, alpha = 0.02, eps = 0.02, node = "STRUCTURE" },
+  { name = "-Y MLI",       normal = [0.0, -1.0, 0.0], area = 0.0827, alpha = 0.02, eps = 0.02, node = "STRUCTURE" },
+  { name = "+Z payload",   normal = [0.0, 0.0, 1.0],  area = 0.0226, alpha = 0.30, eps = 0.80, node = "PAYLOAD" },
+  { name = "-Z MLI",       normal = [0.0, 0.0, -1.0], area = 0.0226, alpha = 0.02, eps = 0.02, node = "STRUCTURE" },
+  { name = "Wings front",  normal = [0.0, 1.0, 0.0],  area = 0.1654, alpha = 0.91, eps = 0.85, node = "SOLAR_ARRAY" },
+  { name = "Wings back",   normal = [0.0, -1.0, 0.0], area = 0.1654, alpha = 0.30, eps = 0.80, node = "SOLAR_ARRAY" },
+]
+battery_heater_on_C = 3.0
+battery_heater_off_C = 7.0
+payload_heater_on_C = 8.0
+payload_heater_off_C = 12.0
+earth_ir_W_m2 = 237.0
+albedo = 0.30
+
+[comms]
+frequency_hz = 2.245e9         # S-band downlink
+tx_power_w = 2.0
+antenna_peak_gain_dbi = 6.0
+antenna_pattern_n = 1.4        # gain ~ cos^n(off-boresight)
+antenna_boresight_body = [0.0, 0.0, 1.0]
+tx_losses_db = 1.5
+atmo_losses_db = 0.3           # at zenith, scaled with 1/sin(el)
+polarization_loss_db = 0.5
+required_ebn0_db = 2.5         # QPSK + LDPC r=1/2
+link_margin_db = 3.0
+rates_bps = [250e3, 500e3, 1e6, 2e6, 4e6, 8e6, 12e6]
+protocol_efficiency = 0.88
+min_elevation_deg = 5.0
+hk_rate_bps = 1000.0
+
+[[comms.ground_stations]]
+name = "Bari (Poliba)"
+lat_deg = 41.1083
+lon_deg = 16.8786
+alt_m = 30.0
+g_over_t_dbk = 10.5            # 2.4 m dish
+
+[propulsion]
+# Warm-gas (butane) thruster, thrust along +X body.
+isp_s = 105.0
+thrust_N = 0.025
+propellant_kg = 0.250
+thrust_axis_body = [1.0, 0.0, 0.0]
+thrust_misalignment_m = [0.0, 0.002, 0.003]
+sma_deadband_m = 150.0         # trigger orbit maintenance below this SMA loss
+
+[payload]
+gsd_m = 10.0
+frame_px = 2048
+bands = 4                      # B, G, R, NIR
+bits = 12
+frame_interval_s = 3.0
+integration_time_s = 0.002
+min_sun_elevation_deg = 10.0
+max_smear_px = 1.0
+max_pointing_error_deg = 2.0
+mass_memory_GB = 16.0
+alert_bytes = 12000            # detection metadata + 64x64 chip
+roi_crop_bytes = 1600000       # 512x512 ROI around a detection
+
+[payload.ai]
+enabled = true
+model_file = "edgesat/ai/model_int8.npz"
+tiles_per_frame = 64           # the model runs on 64 decimated tiles per frame
+io_overhead_s = 0.14           # read 25 MB from mass memory + decimation
+effective_gops = 12.0          # sustained int8 throughput of the on-board AI unit
+keep_threshold = 0.35          # minimum expected value to keep a frame
+fire_alert_confidence = 0.6
+ram_buffer_frames = 80         # frames held in the AI processor RAM awaiting inference
+value_half_life_h = 24.0       # expected value of a frame halves every day it waits on board
+
+# Areas of interest (imaging only happens inside these, in daylight)
+[[payload.aoi]]
+name = "Mediterranean"
+lat = [30.0, 46.5]
+lon = [-10.0, 37.0]
+
+[[payload.aoi]]
+name = "California"
+lat = [32.0, 42.0]
+lon = [-124.5, -114.0]
+
+[[payload.aoi]]
+name = "Southern Africa"
+lat = [-18.0, -5.0]
+lon = [12.0, 32.0]
+
+[[payload.aoi]]
+name = "Amazon / Cerrado"
+lat = [-16.0, -3.0]
+lon = [-62.0, -44.0]
+
+# Wildfire scenario: Poisson births per day inside each zone, lifetime in hours
+[[scenario.fire_zone]]
+name = "Mediterranean"
+lat = [35.0, 45.0]
+lon = [-9.0, 30.0]
+births_per_day = 60.0
+lifetime_h = [8.0, 72.0]
+
+[[scenario.fire_zone]]
+name = "California"
+lat = [33.0, 41.5]
+lon = [-123.5, -116.0]
+births_per_day = 20.0
+lifetime_h = [12.0, 96.0]
+
+[[scenario.fire_zone]]
+name = "Southern Africa"
+lat = [-17.0, -6.0]
+lon = [13.0, 31.0]
+births_per_day = 400.0
+lifetime_h = [6.0, 48.0]
+
+[[scenario.fire_zone]]
+name = "Amazon / Cerrado"
+lat = [-15.0, -4.0]
+lon = [-60.0, -45.0]
+births_per_day = 250.0
+lifetime_h = [6.0, 48.0]
+
+[fdir]
+safe_mode_auto_recovery_s = 600.0
+battery_overtemp_C = 40.0
+wheel_speed_mismatch_frac = 0.2
+obc_reboot_s = 90.0
+ai_watchdog_s = 30.0

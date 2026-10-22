@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EDGESAT-1 Mission Control</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Semi+Condensed:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/vendor/uPlot.min.css">
+<link rel="stylesheet" href="/static/css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='12' y='9' width='8' height='14' fill='%23d4a84b'/%3E%3Crect x='1' y='12' width='10' height='8' fill='%234c7bd9'/%3E%3Crect x='21' y='12' width='10' height='8' fill='%234c7bd9'/%3E%3C/svg%3E">
+</head>
+<body>
+<header class="topbar">
+  <div class="mission">
+    <span class="mission-name">EDGESAT-1</span>
+    <span class="mission-sub">6U wildfire-watch CubeSat, digital twin</span>
+  </div>
+  <div class="clock">
+    <div><span class="k">UTC</span> <span id="utc" class="num">—</span></div>
+    <div><span class="k">Mission time</span> <span id="met" class="num">—</span></div>
+  </div>
+  <div class="state">
+    <span id="mode-badge" class="badge">—</span>
+    <span id="activity-badge" class="badge ghost">—</span>
+  </div>
+  <div class="warp" role="group" aria-label="Time warp">
+    <button data-warp="pause" title="Pause / resume" aria-label="Pause">❚❚</button>
+    <button data-warp="1">1×</button>
+    <button data-warp="10">10×</button>
+    <button data-warp="60">60×</button>
+    <button data-warp="200">200×</button>
+    <button data-warp="600">600×</button>
+    <span class="achieved num" id="achieved" title="Achieved time warp"></span>
+  </div>
+  <label class="ai-switch" title="Toggle the on-board Edge AI">
+    <input type="checkbox" id="ai-toggle" checked>
+    <span class="track"><span class="knob"></span></span>
+    <span>Edge AI</span>
+  </label>
+</header>
+
+<div class="layout">
+  <nav class="sidenav" aria-label="Subsystems">
+    <button class="nav-item active" data-view="overview"><i class="dot" data-status="overview"></i>Overview</button>
+    <button class="nav-item" data-view="adcs"><i class="dot" data-status="adcs"></i>Attitude <small>ADCS</small></button>
+    <button class="nav-item" data-view="eps"><i class="dot" data-status="eps"></i>Power <small>EPS</small></button>
+    <button class="nav-item" data-view="tcs"><i class="dot" data-status="tcs"></i>Thermal <small>TCS</small></button>
+    <button class="nav-item" data-view="comms"><i class="dot" data-status="comms"></i>Communications</button>
+    <button class="nav-item" data-view="obdh"><i class="dot" data-status="obdh"></i>Data handling &amp; FDIR</button>
+    <button class="nav-item" data-view="prop"><i class="dot" data-status="prop"></i>Propulsion</button>
+    <button class="nav-item" data-view="payload"><i class="dot" data-status="payload"></i>Payload &amp; Edge AI</button>
+    <div class="nav-foot">
+      <button class="link" data-reset="nominal">Restart: nominal ops</button>
+      <button class="link" data-reset="leop">Restart: launch &amp; early orbit</button>
+    </div>
+  </nav>
+
+  <main id="views">
+    <!-- ============================================================ OVERVIEW -->
+    <section class="view active" id="view-overview">
+      <div class="ov-grid">
+        <div class="panel globe-panel">
+          <div id="globe" class="globe"></div>
+          <div class="globe-overlay">
+            <div class="ov-orbit">
+              <div><span class="k">Lat / Lon</span> <span class="num" id="ov-latlon">—</span></div>
+              <div><span class="k">Altitude</span> <span class="num" id="ov-alt">—</span></div>
+              <div><span class="k">Illumination</span> <span class="num" id="ov-sun">—</span></div>
+              <div><span class="k">Next contact</span> <span class="num" id="ov-next">—</span></div>
+            </div>
+            <div class="globe-legend">
+              <span><i class="lg aoi"></i>Imaging areas</span>
+              <span><i class="lg fire"></i>Active fire</span>
+              <span><i class="lg alerted"></i>Fire alert on ground</span>
+              <span><i class="lg gs"></i>Bari ground station</span>
+            </div>
+            <button class="chip" id="follow-toggle" aria-pressed="true">Follow spacecraft</button>
+          </div>
+          <div class="att-inset"><div id="att-small" class="att-canvas"></div><span class="cap">Attitude in the local orbital frame</span></div>
+        </div>
+        <div class="panel tiles" id="tiles"></div>
+        <div class="panel compare">
+          <h2>Edge AI vs store-everything</h2>
+          <p class="hint">Same orbit, same frames, same downlink capacity. Only the on-board decision differs.</p>
+          <div id="cmp-body"></div>
+        </div>
+        <div class="panel map-panel">
+          <h2>Ground track</h2>
+          <canvas id="map2d"></canvas>
+        </div>
+        <div class="panel timeline-panel">
+          <h2>Next four hours</h2>
+          <div id="timeline"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ ADCS -->
+    <section class="view" id="view-adcs">
+      <div class="grid g-adcs">
+        <div class="panel att-big"><h2>Attitude</h2><div id="att-big" class="att-canvas"></div>
+          <div class="kv" id="adcs-kv"></div></div>
+        <div class="panel"><h2>Sensors &amp; actuators</h2><div id="adcs-sensors"></div></div>
+        <div class="panel"><h2>Pointing error</h2><div class="chart" data-chart="point"></div></div>
+        <div class="panel"><h2>Knowledge error and 3σ bound</h2><div class="chart" data-chart="know"></div></div>
+        <div class="panel"><h2>Reaction-wheel momentum</h2><div class="chart" data-chart="wheels"></div></div>
+        <div class="panel"><h2>Disturbance torques</h2><div class="chart" data-chart="torques"></div></div>
+        <div class="panel"><h2>Attitude matrix A (inertial → body)</h2><div id="mat-dcm" class="matrix"></div></div>
+        <div class="panel"><h2>MEKF covariance, correlation</h2><div id="mat-cov" class="matrix"></div><p class="hint">States: attitude error θx θy θz, gyro bias bx by bz. Diagonal shows 1σ.</p></div>
+        <div class="panel"><h2>Quaternions</h2><div id="quats"></div></div>
+        <div class="panel"><h2>Inertia tensor [kg m²]</h2><div id="mat-inertia" class="matrix"></div></div>
+      </div>
+    </section>
+
+    <!-- ============================================================ EPS -->
+    <section class="view" id="view-eps">
+      <div class="grid g-eps">
+        <div class="panel"><h2>Battery</h2><div id="eps-battery"></div></div>
+        <div class="panel"><h2>State of charge</h2><div class="chart" data-chart="soc"></div></div>
+        <div class="panel"><h2>Solar input vs load</h2><div class="chart" data-chart="power"></div></div>
+        <div class="panel"><h2>Solar panels</h2><div id="eps-panels"></div></div>
+        <div class="panel span2"><h2>Load bus</h2><div id="eps-loads"></div></div>
+      </div>
+    </section>
+
+    <!-- ============================================================ TCS -->
+    <section class="view" id="view-tcs">
+      <div class="grid g-tcs">
+        <div class="panel"><h2>Nodes and limits</h2><div id="tcs-nodes"></div></div>
+        <div class="panel"><h2>Node temperatures</h2><div class="chart" data-chart="temps"></div></div>
+        <div class="panel"><h2>Heat balance</h2><div id="tcs-flows"></div></div>
+        <div class="panel"><h2>Conductance matrix G [W/K]</h2><div id="mat-g" class="matrix"></div></div>
+      </div>
+    </section>
+
+    <!-- ============================================================ COMMS -->
+    <section class="view" id="view-comms">
+      <div class="grid g-comms">
+        <div class="panel"><h2>Downlink budget</h2><div id="link-budget"></div></div>
+        <div class="panel"><h2>Sky view from Bari</h2><canvas id="skyplot" width="320" height="320"></canvas></div>
+        <div class="panel"><h2>Elevation and margin</h2><div class="chart" data-chart="link"></div></div>
+        <div class="panel"><h2>Downlink rate</h2><div class="chart" data-chart="rate"></div></div>
+        <div class="panel span2"><h2>Upcoming contacts</h2><div id="contacts"></div></div>
+      </div>
+    </section>
+
+    <!-- ============================================================ OBDH -->
+    <section class="view" id="view-obdh">
+      <div class="grid g-obdh">
+        <div class="panel span2"><h2>Modes and activities</h2><div id="modes-svg"></div></div>
+        <div class="panel"><h2>On-board computer</h2><div id="obc-kv"></div></div>
+        <div class="panel"><h2>Mass memory</h2><div id="memory"></div><div class="chart short" data-chart="memory"></div></div>
+        <div class="panel span2"><h2>Event log</h2><div id="event-full" class="events tall"></div></div>
+      </div>
+    </section>
+
+    <!-- ============================================================ PROP -->
+    <section class="view" id="view-prop">
+      <div class="grid g-prop">
+        <div class="panel"><h2>Thruster</h2><div id="prop-kv"></div>
+          <div class="row-actions"><button class="btn" id="burn-btn">Fire 5 cm/s prograde</button></div></div>
+        <div class="panel"><h2>Mean semi-major axis vs reference</h2><div class="chart" data-chart="sma"></div>
+          <p class="hint">Dashed line: the 150 m dead-band that triggers an orbit-maintenance burn.</p></div>
+        <div class="panel"><h2>Altitude</h2><div class="chart" data-chart="alt"></div>
+          <p class="hint">Osculating geodetic altitude: it swings by ~25 km per orbit because of Earth's oblateness and J2.</p></div>
+        <div class="panel"><h2>Burn log</h2><div id="burns"></div></div>
+      </div>
+    </section>
+
+    <!-- ============================================================ PAYLOAD -->
+    <section class="view" id="view-payload">
+      <div class="grid g-payload">
+        <div class="panel span2"><h2>Latest frames as the AI sees them</h2><div id="frames" class="frames"></div></div>
+        <div class="panel"><h2>On-board decisions</h2><div id="decisions"></div></div>
+        <div class="panel"><h2>Confusion matrix in flight</h2><div id="mat-conf" class="matrix"></div><p class="hint">Rows: truth. Columns: prediction.</p></div>
+        <div class="panel"><h2>Useful data on the ground</h2><div class="chart" data-chart="useful"></div></div>
+        <div class="panel"><h2>Model on board</h2><div id="model-card"></div></div>
+        <div class="panel span2"><h2>Wildfire alerts</h2><div id="alerts"></div></div>
+      </div>
+    </section>
+  </main>
+
+  <aside class="rail">
+    <div class="panel">
+      <h2>Events</h2>
+      <div id="events" class="events"></div>
+    </div>
+    <div class="panel">
+      <h2>Inject a fault</h2>
+      <div id="faults" class="faults"></div>
+      <div class="row-actions">
+        <button class="btn ghost" data-cmd="mode" data-arg="SAFE">Command safe mode</button>
+        <button class="btn ghost" data-cmd="mode" data-arg="NOMINAL">Command nominal</button>
+        <button class="btn ghost" data-cmd="repair_all">Repair all (sim only)</button>
+      </div>
+    </div>
+  </aside>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="/static/vendor/uPlot.iife.min.js"></script>
+<script type="module" src="/static/js/app.js"></script>
+</body>
+</html>

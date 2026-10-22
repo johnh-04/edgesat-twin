@@ -1,0 +1,1044 @@
+{
+ "edge_ai": {
+  "ai": true,
+  "days": 5.0,
+  "seed": 42,
+  "frames_acquired": 1623,
+  "truth_counts": {
+   "CLOUD": 314,
+   "WATER": 249,
+   "LAND": 1026,
+   "FIRE": 34
+  },
+  "frames_smeared": 0,
+  "decisions": {
+   "kept": 1046,
+   "alert": 34,
+   "discard_cloud": 299,
+   "discard_water": 244,
+   "discard_lowvalue": 0,
+   "discard_blur": 0,
+   "fallback_store": 0
+  },
+  "confusion": [
+   [
+    294,
+    2,
+    18,
+    0
+   ],
+   [
+    5,
+    243,
+    1,
+    0
+   ],
+   [
+    26,
+    0,
+    1000,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    34
+   ]
+  ],
+  "downlinked_gb": 11.9898175,
+  "bytes_by_kind_gb": {
+   "HK": 0.051225,
+   "ALERT": 0.000408,
+   "ROI": 0.0544,
+   "FRAME": 11.8837845
+  },
+  "frames_delivered": 463,
+  "useful_frames_delivered": 456,
+  "useful_gb": 11.762023732,
+  "value_delivered": 624.5861328125,
+  "median_frame_age_h": 3.665,
+  "dropped_memory_full": 45,
+  "evicted": 24,
+  "memory_fill_pct": 91.83601965,
+  "fires_imaged": 35,
+  "fires_alerted_on_ground": 35,
+  "false_alerts_delivered": 0,
+  "fires_with_imagery_on_ground": 35,
+  "fires_with_any_info_on_ground": 35,
+  "alert_latency_h": [
+   0.0,
+   3.5633333333333335,
+   6.924166666666666,
+   6.930833333333333,
+   6.9475,
+   6.95,
+   0.0,
+   0.14916666666666667,
+   0.15416666666666667,
+   0.15916666666666668,
+   0.16833333333333333,
+   6.912222222222222,
+   6.916388888888889,
+   6.918055555555555,
+   6.926388888888889,
+   6.937222222222222,
+   6.952222222222222,
+   0.14027777777777778,
+   0.14944444444444444,
+   0.17027777777777778,
+   6.9175,
+   0.15444444444444444,
+   0.15527777777777776,
+   0.16777777777777778,
+   6.9191666666666665,
+   0.14222222222222222,
+   0.15722222222222224,
+   0.16055555555555556,
+   0.16055555555555556,
+   0.0,
+   6.9325,
+   6.934166666666667,
+   6.935,
+   6.9475,
+   6.958333333333333
+  ],
+  "image_latency_h": [
+   0.0002777777777777778,
+   3.563888888888889,
+   6.925,
+   6.9319444444444445,
+   6.948888888888889,
+   6.951666666666667,
+   0.0002777777777777778,
+   0.1502777777777778,
+   0.15611111111111112,
+   0.1622222222222222,
+   0.1725,
+   6.9127777777777775,
+   6.917222222222223,
+   6.9191666666666665,
+   6.927777777777778,
+   6.939166666666667,
+   6.954444444444444,
+   0.14083333333333334,
+   0.15055555555555555,
+   0.17194444444444446,
+   6.918055555555555,
+   0.155,
+   0.15638888888888888,
+   0.16944444444444445,
+   6.919722222222222,
+   0.14277777777777778,
+   0.15833333333333333,
+   0.1622222222222222,
+   0.1622222222222222,
+   0.0002777777777777778,
+   6.932777777777778,
+   6.935,
+   6.936111111111111,
+   6.948888888888889,
+   6.96
+  ],
+  "info_latency_h": [
+   0.0,
+   0.0,
+   0.0,
+   3.5633333333333335,
+   0.16833333333333333,
+   0.15916666666666668,
+   0.15416666666666667,
+   0.14916666666666667,
+   0.17027777777777778,
+   0.15527777777777776,
+   0.14944444444444444,
+   0.14027777777777778,
+   0.16777777777777778,
+   0.15444444444444444,
+   0.14222222222222222,
+   0.16055555555555556,
+   0.16055555555555556,
+   0.15722222222222224,
+   6.930833333333333,
+   6.924166666666666,
+   6.95,
+   6.9475,
+   6.952222222222222,
+   6.918055555555555,
+   6.912222222222222,
+   6.937222222222222,
+   6.926388888888889,
+   6.916388888888889,
+   6.9175,
+   6.9191666666666665,
+   6.9475,
+   6.934166666666667,
+   6.958333333333333,
+   6.9325,
+   6.935
+  ],
+  "energy_wh": {
+   "obc": 96.0,
+   "adcs_electronics": 84.0,
+   "reaction_wheels": 54.04,
+   "magnetorquers": 2.17,
+   "star_tracker": 120.0,
+   "gyro": 36.0,
+   "gnss": 72.0,
+   "radio_rx": 48.0,
+   "transmitter": 17.98,
+   "camera": 4.72,
+   "ai_unit": 5.08,
+   "battery_heater": 0.0,
+   "payload_heater": 176.78,
+   "propulsion": 0.13
+  },
+  "energy_total_wh": 716.9046767891508,
+  "passes": 20,
+  "burns": 2,
+  "dv_used_m_s": 0.24778527290380303,
+  "min_soc_pct": 85.23444031386252,
+  "events": [
+   {
+    "t": 412519.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 CHARGE"
+   },
+   {
+    "t": 411854.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 DOWNLINK"
+   },
+   {
+    "t": 406824.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 CHARGE"
+   },
+   {
+    "t": 406215.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 DOWNLINK"
+   },
+   {
+    "t": 381465.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity IMAGING \u2192 CHARGE"
+   },
+   {
+    "t": 381112.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 IMAGING"
+   },
+   {
+    "t": 370602.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity IMAGING \u2192 CHARGE"
+   },
+   {
+    "t": 370416.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 IMAGING"
+   },
+   {
+    "t": 365288.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 CHARGE"
+   },
+   {
+    "t": 365108.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity IMAGING \u2192 DOWNLINK"
+   },
+   {
+    "t": 364697.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 IMAGING"
+   },
+   {
+    "t": 364597.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 DOWNLINK"
+   },
+   {
+    "t": 364288.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity IMAGING \u2192 CHARGE"
+   },
+   {
+    "t": 363935.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 IMAGING"
+   },
+   {
+    "t": 359572.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 CHARGE"
+   },
+   {
+    "t": 359393.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity IMAGING \u2192 DOWNLINK"
+   },
+   {
+    "t": 359079.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 IMAGING"
+   },
+   {
+    "t": 359038.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 DOWNLINK"
+   },
+   {
+    "t": 326763.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 CHARGE"
+   },
+   {
+    "t": 326129.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 DOWNLINK"
+   },
+   {
+    "t": 321111.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 CHARGE"
+   },
+   {
+    "t": 320470.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 DOWNLINK"
+   },
+   {
+    "t": 295734.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity IMAGING \u2192 CHARGE"
+   },
+   {
+    "t": 295387.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 IMAGING"
+   },
+   {
+    "t": 279544.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 CHARGE"
+   },
+   {
+    "t": 279377.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity IMAGING \u2192 DOWNLINK"
+   },
+   {
+    "t": 278972.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 IMAGING"
+   },
+   {
+    "t": 278872.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 DOWNLINK"
+   },
+   {
+    "t": 278556.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity IMAGING \u2192 CHARGE"
+   },
+   {
+    "t": 278210.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 IMAGING"
+   },
+   {
+    "t": 273855.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 CHARGE"
+   },
+   {
+    "t": 273662.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity IMAGING \u2192 DOWNLINK"
+   },
+   {
+    "t": 273253.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 IMAGING"
+   },
+   {
+    "t": 240999.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 CHARGE"
+   },
+   {
+    "t": 240404.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 DOWNLINK"
+   },
+   {
+    "t": 235390.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 CHARGE"
+   },
+   {
+    "t": 234725.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 DOWNLINK"
+   },
+   {
+    "t": 210002.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity IMAGING \u2192 CHARGE"
+   },
+   {
+    "t": 209662.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 IMAGING"
+   },
+   {
+    "t": 193794.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 CHARGE"
+   },
+   {
+    "t": 193645.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity IMAGING \u2192 DOWNLINK"
+   },
+   {
+    "t": 193248.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 IMAGING"
+   },
+   {
+    "t": 193147.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 DOWNLINK"
+   },
+   {
+    "t": 192823.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity IMAGING \u2192 CHARGE"
+   },
+   {
+    "t": 192485.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 IMAGING"
+   },
+   {
+    "t": 188130.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 CHARGE"
+   },
+   {
+    "t": 187929.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity IMAGING \u2192 DOWNLINK"
+   },
+   {
+    "t": 187529.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 IMAGING"
+   },
+   {
+    "t": 187509.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 DOWNLINK"
+   },
+   {
+    "t": 155228.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 CHARGE"
+   },
+   {
+    "t": 154679.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 DOWNLINK"
+   },
+   {
+    "t": 151378.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity SUN_ACQ \u2192 CHARGE"
+   },
+   {
+    "t": 151378.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "mode LEOP \u2192 NOMINAL: LEOP complete: attitude acquired"
+   },
+   {
+    "t": 151007.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DETUMBLE \u2192 SUN_ACQ"
+   },
+   {
+    "t": 151006.0,
+    "sev": "INFO",
+    "sub": "ADCS",
+    "msg": "detumbling complete, starting Sun acquisition"
+   },
+   {
+    "t": 149497.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 DETUMBLE"
+   },
+   {
+    "t": 149496.0,
+    "sev": "ALARM",
+    "sub": "FDIR",
+    "msg": "rate > 4 deg/s: re-entering detumble"
+   },
+   {
+    "t": 148965.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 DOWNLINK"
+   },
+   {
+    "t": 136416.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity IMAGING \u2192 CHARGE"
+   },
+   {
+    "t": 136143.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 IMAGING"
+   }
+  ],
+  "wall_s": 860.7366364002228
+ },
+ "baseline": {
+  "ai": false,
+  "days": 5.0,
+  "seed": 42,
+  "frames_acquired": 1623,
+  "truth_counts": {
+   "CLOUD": 314,
+   "WATER": 249,
+   "LAND": 1026,
+   "FIRE": 34
+  },
+  "frames_smeared": 0,
+  "decisions": {
+   "kept": 0,
+   "alert": 0,
+   "discard_cloud": 0,
+   "discard_water": 0,
+   "discard_lowvalue": 0,
+   "discard_blur": 0,
+   "fallback_store": 1058
+  },
+  "confusion": [
+   [
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0
+   ]
+  ],
+  "downlinked_gb": 11.9898175,
+  "bytes_by_kind_gb": {
+   "HK": 0.04887,
+   "ALERT": 0.0,
+   "ROI": 0.0,
+   "FRAME": 11.9409475
+  },
+  "frames_delivered": 474,
+  "useful_frames_delivered": 279,
+  "useful_gb": 7.021264896,
+  "value_delivered": 298.8794921875001,
+  "median_frame_age_h": 54.59,
+  "dropped_memory_full": 924,
+  "evicted": 0,
+  "memory_fill_pct": 91.7933237,
+  "fires_imaged": 35,
+  "fires_alerted_on_ground": 0,
+  "false_alerts_delivered": 0,
+  "fires_with_imagery_on_ground": 11,
+  "fires_with_any_info_on_ground": 11,
+  "alert_latency_h": [],
+  "image_latency_h": [
+   14.647222222222222,
+   43.10916666666667,
+   43.1225,
+   54.61888888888889,
+   54.65472222222222,
+   61.94277777777778,
+   71.43833333333333,
+   84.74222222222222,
+   84.79138888888889,
+   84.81833333333333,
+   84.845
+  ],
+  "info_latency_h": [
+   14.647222222222222,
+   71.43833333333333,
+   61.94277777777778,
+   84.74222222222222,
+   84.79138888888889,
+   84.81833333333333,
+   84.845,
+   54.61888888888889,
+   54.65472222222222,
+   43.10916666666667,
+   43.1225
+  ],
+  "energy_wh": {
+   "obc": 96.0,
+   "adcs_electronics": 84.0,
+   "reaction_wheels": 54.04,
+   "magnetorquers": 2.17,
+   "star_tracker": 120.0,
+   "gyro": 36.0,
+   "gnss": 72.0,
+   "radio_rx": 48.0,
+   "transmitter": 17.98,
+   "camera": 4.72,
+   "ai_unit": 4.72,
+   "battery_heater": 0.0,
+   "payload_heater": 176.78,
+   "propulsion": 0.13
+  },
+  "energy_total_wh": 716.5380315002263,
+  "passes": 20,
+  "burns": 2,
+  "dv_used_m_s": 0.24778527290380303,
+  "min_soc_pct": 85.23444031386252,
+  "events": [
+   {
+    "t": 412519.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 CHARGE"
+   },
+   {
+    "t": 411854.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 DOWNLINK"
+   },
+   {
+    "t": 406824.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 CHARGE"
+   },
+   {
+    "t": 406215.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 DOWNLINK"
+   },
+   {
+    "t": 381465.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity IMAGING \u2192 CHARGE"
+   },
+   {
+    "t": 381112.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 IMAGING"
+   },
+   {
+    "t": 370602.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity IMAGING \u2192 CHARGE"
+   },
+   {
+    "t": 370416.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 IMAGING"
+   },
+   {
+    "t": 365288.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 CHARGE"
+   },
+   {
+    "t": 365108.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity IMAGING \u2192 DOWNLINK"
+   },
+   {
+    "t": 364697.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 IMAGING"
+   },
+   {
+    "t": 364597.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 DOWNLINK"
+   },
+   {
+    "t": 364288.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity IMAGING \u2192 CHARGE"
+   },
+   {
+    "t": 363935.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 IMAGING"
+   },
+   {
+    "t": 359572.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 CHARGE"
+   },
+   {
+    "t": 359393.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity IMAGING \u2192 DOWNLINK"
+   },
+   {
+    "t": 359079.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 IMAGING"
+   },
+   {
+    "t": 359038.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 DOWNLINK"
+   },
+   {
+    "t": 326763.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 CHARGE"
+   },
+   {
+    "t": 326129.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 DOWNLINK"
+   },
+   {
+    "t": 321111.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 CHARGE"
+   },
+   {
+    "t": 320470.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 DOWNLINK"
+   },
+   {
+    "t": 295734.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity IMAGING \u2192 CHARGE"
+   },
+   {
+    "t": 295387.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 IMAGING"
+   },
+   {
+    "t": 279544.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 CHARGE"
+   },
+   {
+    "t": 279377.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity IMAGING \u2192 DOWNLINK"
+   },
+   {
+    "t": 278972.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 IMAGING"
+   },
+   {
+    "t": 278872.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 DOWNLINK"
+   },
+   {
+    "t": 278556.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity IMAGING \u2192 CHARGE"
+   },
+   {
+    "t": 278210.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 IMAGING"
+   },
+   {
+    "t": 273855.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 CHARGE"
+   },
+   {
+    "t": 273662.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity IMAGING \u2192 DOWNLINK"
+   },
+   {
+    "t": 273253.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 IMAGING"
+   },
+   {
+    "t": 240999.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 CHARGE"
+   },
+   {
+    "t": 240404.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 DOWNLINK"
+   },
+   {
+    "t": 235390.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 CHARGE"
+   },
+   {
+    "t": 234725.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 DOWNLINK"
+   },
+   {
+    "t": 210002.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity IMAGING \u2192 CHARGE"
+   },
+   {
+    "t": 209662.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 IMAGING"
+   },
+   {
+    "t": 193794.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 CHARGE"
+   },
+   {
+    "t": 193645.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity IMAGING \u2192 DOWNLINK"
+   },
+   {
+    "t": 193248.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 IMAGING"
+   },
+   {
+    "t": 193147.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 DOWNLINK"
+   },
+   {
+    "t": 192823.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity IMAGING \u2192 CHARGE"
+   },
+   {
+    "t": 192485.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 IMAGING"
+   },
+   {
+    "t": 188130.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 CHARGE"
+   },
+   {
+    "t": 187929.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity IMAGING \u2192 DOWNLINK"
+   },
+   {
+    "t": 187529.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 IMAGING"
+   },
+   {
+    "t": 187509.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 DOWNLINK"
+   },
+   {
+    "t": 155228.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 CHARGE"
+   },
+   {
+    "t": 154679.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 DOWNLINK"
+   },
+   {
+    "t": 151378.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity SUN_ACQ \u2192 CHARGE"
+   },
+   {
+    "t": 151378.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "mode LEOP \u2192 NOMINAL: LEOP complete: attitude acquired"
+   },
+   {
+    "t": 151007.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DETUMBLE \u2192 SUN_ACQ"
+   },
+   {
+    "t": 151006.0,
+    "sev": "INFO",
+    "sub": "ADCS",
+    "msg": "detumbling complete, starting Sun acquisition"
+   },
+   {
+    "t": 149497.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity DOWNLINK \u2192 DETUMBLE"
+   },
+   {
+    "t": 149496.0,
+    "sev": "ALARM",
+    "sub": "FDIR",
+    "msg": "rate > 4 deg/s: re-entering detumble"
+   },
+   {
+    "t": 148965.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 DOWNLINK"
+   },
+   {
+    "t": 136416.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity IMAGING \u2192 CHARGE"
+   },
+   {
+    "t": 136143.0,
+    "sev": "INFO",
+    "sub": "OBDH",
+    "msg": "activity CHARGE \u2192 IMAGING"
+   }
+  ],
+  "wall_s": 852.0274603366852
+ }
+}
